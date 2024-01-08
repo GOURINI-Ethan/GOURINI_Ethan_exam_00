@@ -1,34 +1,29 @@
-public class PalindromeSolution
+public class TwoNumberSumSolution
 {
-    public static bool IsPalindrome(string str)
+    public static int[] TwoNumberSum(int[] array, int targetSum)
     {
-        int left = 0;
-        int right = str.Length - 1;
+        HashSet<int> nums = new HashSet<int>();
 
-        while (left < right)
+        foreach (int num in array)
         {
-            if (str[left] != str[right])
+            int potentialMatch = targetSum - num;
+            if (nums.Contains(potentialMatch))
             {
-                return false;
+                return new int[] { potentialMatch, num };
             }
-
-            left++;
-            right--;
+            nums.Add(num);
         }
 
-        return true;
+        return new int[] { };
     }
 
     static void Main()
     {
-        //test 1
-        string str1 = "ficelle";
-        bool result1 = IsPalindrome(str1);
-        Console.WriteLine($"Test 1: {str1} -> Output: {result1}");
+        
+        int[] array = { 3, 5, -4, 8, 11, 1, -1, 6 };
+        int targetSum = 10;
+        int[] result = TwoNumberSum(array, targetSum);
 
-        //test 2
-        string str2 = "kayak";
-        bool result2 = IsPalindrome(str2);
-        Console.WriteLine($"Test 2: {str2} -> Output: {result2}");
+        Console.WriteLine("Output: [" + string.Join(", ", result) + "]");
     }
 }
